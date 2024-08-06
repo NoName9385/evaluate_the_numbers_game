@@ -12,6 +12,7 @@ window.initGame = (React, assetsUrl) => {
     const [correctGuesses, setCorrectGuesses] = useState(0);
     const [incorrectGuesses, setIncorrectGuesses] = useState(0);
     const [bestTime, setBestTime] = useState(Infinity);
+    const [score, setScore] = useState(100);
 
     useEffect(() => {
       const interval = setInterval(() => {
@@ -26,6 +27,7 @@ window.initGame = (React, assetsUrl) => {
         const newTime = timer;
         setMessage(`Congratulations, you guessed the number in ${newTime} seconds!`);
         setCorrectGuesses(correctGuesses => correctGuesses + 1);
+        setScore(score => score + 100);
         if (newTime < bestTime) {
           setBestTime(newTime);
         }
@@ -33,9 +35,11 @@ window.initGame = (React, assetsUrl) => {
       } else if (guess < randomNumber) {
         setMessage("Too low, try again!");
         setIncorrectGuesses(incorrectGuesses => incorrectGuesses + 1);
+        setScore(score => score - 10);
       } else {
         setMessage("Too high, try again!");
         setIncorrectGuesses(incorrectGuesses => incorrectGuesses + 1);
+        setScore(score => score - 10);
       }
     };
 
@@ -44,6 +48,7 @@ window.initGame = (React, assetsUrl) => {
       setGuess(0);
       setTimer(0);
       setMessage('');
+      setScore(100);
     };
 
     return React.createElement(
@@ -67,7 +72,8 @@ window.initGame = (React, assetsUrl) => {
       React.createElement('button', { onClick: resetGame }, "Reset"),
       React.createElement('p', null, `Correct guesses: ${correctGuesses}`),
       React.createElement('p', null, `Incorrect guesses: ${incorrectGuesses}`),
-      React.createElement('p', null, `Best time: ${bestTime === Infinity ? 'N/A' : bestTime} seconds`)
+      React.createElement('p', null, `Best time: ${bestTime === Infinity ? 'N/A' : bestTime} seconds`),
+      React.createElement('p', null, `Score: ${score}`)
     );
   };
 
