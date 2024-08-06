@@ -83,4 +83,3 @@ window.initGame = (React, assetsUrl) => {
   return () => React.createElement(GuessTheNumber, { assetsUrl: assetsUrl });
 };
 
-
