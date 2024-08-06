@@ -60,7 +60,25 @@ window.initGame = (React, assetsUrl) => {
         'input',
         {
           type: 'number',
-          min:
+          min: 1,
+          max: 100,
+          value: guess,
+          onChange: (e) => setGuess(parseInt(e.target.value))
+        }
+      ),
+      React.createElement('button', { onClick: handleGuess }, "Guess"),
+      React.createElement('p', null, message),
+      React.createElement('p', null, `Time elapsed: ${timer} seconds`),
+      React.createElement('button', { onClick: resetGame }, "Reset"),
+      React.createElement('p', null, `Score: ${score}`),
+      React.createElement('p', null, `Correct guesses: ${correctGuesses}`),
+      React.createElement('p', null, `Incorrect guesses: ${incorrectGuesses}`),
+      React.createElement('p', null, `Best time: ${bestTime === Infinity ? 'N/A' : bestTime} seconds`)
+    );
+  };
+
+  return () => React.createElement(GuessTheNumber, { assetsUrl: assetsUrl });
+};
 
 
 
