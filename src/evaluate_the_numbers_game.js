@@ -13,6 +13,7 @@ window.initGame = (React, assetsUrl) => {
     const [incorrectGuesses, setIncorrectGuesses] = useState(0);
     const [bestTime, setBestTime] = useState(Infinity);
     const [score, setScore] = useState(100);
+    const [totalScore, setTotalScore] = useState(0);
 
     useEffect(() => {
       const interval = setInterval(() => {
@@ -28,6 +29,7 @@ window.initGame = (React, assetsUrl) => {
         setMessage(`Congratulations, you guessed the number in ${newTime} seconds!`);
         setCorrectGuesses(correctGuesses => correctGuesses + 1);
         setScore(score => score + 100);
+        setTotalScore(totalScore => totalScore + score);
         if (newTime < bestTime) {
           setBestTime(newTime);
         }
@@ -71,6 +73,7 @@ window.initGame = (React, assetsUrl) => {
       React.createElement('p', null, `Time elapsed: ${timer} seconds`),
       React.createElement('button', { onClick: resetGame }, "Reset"),
       React.createElement('p', null, `Score: ${score}`),
+      React.createElement('p', null, `Total score: ${totalScore}`),
       React.createElement('p', null, `Correct guesses: ${correctGuesses}`),
       React.createElement('p', null, `Incorrect guesses: ${incorrectGuesses}`),
       React.createElement('p', null, `Best time: ${bestTime === Infinity ? 'N/A' : bestTime} seconds`)
